@@ -3,7 +3,7 @@ import "./homepage.styles.scss";
 import Directory from "../../components/directory/directory.component";
 
 function HomePage(props) {
-  console.log(props.history);
+  console.log(props);
 
   return (
     <div className="homepage">
