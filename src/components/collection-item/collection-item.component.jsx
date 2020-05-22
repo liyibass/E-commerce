@@ -11,7 +11,7 @@ function CollectionItem({ item }) {
   return (
     <div className="collection-item" key={id}>
       <div className="image" style={imageStyle}></div>
-      <div className="content">
+      <div className="item-content">
         <span className="name">{name}</span>
         <span className="price">{price}</span>
       </div>
