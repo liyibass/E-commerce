@@ -5,12 +5,12 @@ function CollectionItem({ item }) {
   let { id, name, price, imageUrl } = item;
 
   let imageStyle = {
-    background: `url(${imageUrl})`,
+    backgroundImage: `url(${imageUrl})`,
   };
 
   return (
     <div className="collection-item" key={id}>
-      <div className="image" style={imageStyle}></div>
+      <div style={imageStyle} className="item-image"></div>
       <div className="item-content">
         <span className="name">{name}</span>
         <span className="price">{price}</span>

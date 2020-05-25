@@ -7,7 +7,7 @@ import ShopPage from "./pages/shop/shop.component";
 import Header from "./components/header/header.component";
 import SignPage from "./pages/sign-in-and-sign-up/sign-page.component";
 
-import { auth } from "./firebase/firebase.utils";
+import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
 
 class App extends React.Component {
   constructor(props) {
@@ -21,8 +21,29 @@ class App extends React.Component {
   unsubscribeFromAuth = null;
 
   componentDidMount() {
-    this.unsubscribeFromAuth = auth.onAuthStateChanged((user) => {
-      this.setState({ currentUser: user });
+    // 觀察者onAuthStateChanged 監測有無用戶登入 有：user=object 無：user=null
+    this.unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
+      // User is signed in.
+      if (userAuth) {
+        console.log("userAuth from componentDidMount");
+        const userRef = await createUserProfileDocument(userAuth);
+
+        userRef.onSnapshot((snapshot) => {
+          this.setState(
+            {
+              currentUser: {
+                id: snapshot.id,
+                ...snapshot.data(),
+              },
+            },
+            () => console.log("setState fired", this.state.currentUser)
+          );
+        });
+
+        // logged out,then set currentUser to null
+      } else {
+        this.setState({ currentUser: userAuth }, () => console.log("signOut"));
+      }
     });
   }
 

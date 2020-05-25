@@ -9,7 +9,7 @@ function SignPage() {
       {/* <h1>HOHOHO</h1> */}
       <SignIn />
 
-      {/* <SignUp /> */}
+      <SignUp />
     </div>
   );
 }
