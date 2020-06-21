@@ -37,7 +37,7 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
         createdAt,
         ...additionalData,
       };
-      console.log(newUserData);
+      // console.log(newUserData);
 
       await userRef.set(newUserData);
     } catch (error) {
