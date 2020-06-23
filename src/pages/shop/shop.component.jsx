@@ -1,21 +1,14 @@
-import React, { Component } from "react";
-import SHOP_DATA from "./shopdata";
+import React from "react";
+
 import CollectionPreview from "../../components/collection-preview/collection-preview";
 
 import "./shop.style.scss";
+import { useSelector } from "react-redux";
 
-class ShopPage extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      collections: SHOP_DATA,
-    };
-  }
-
-  render() {
-    const { collections } = this.state;
-
-    return (
+function ShopData() {
+  const collections = useSelector((state) => state.shopData.shopData);
+  return (
+    <div>
       <div className="shop-page">
         {collections.map((collection) => {
           return (
@@ -23,8 +16,8 @@ class ShopPage extends Component {
           );
         })}
       </div>
-    );
-  }
+    </div>
+  );
 }
 
-export default ShopPage;
+export default ShopData;

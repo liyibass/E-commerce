@@ -1,7 +1,8 @@
-import { createStore, applyMiddleware } from "redux";
+import { createStore, applyMiddleware, compose } from "redux";
 import rootReducer from "./root-reducer";
 import logger from "redux-logger";
 
+// 將state儲存到localStorage中
 function saveToLocalStorage(state) {
   try {
     const serializedState = JSON.stringify(state);
@@ -10,7 +11,7 @@ function saveToLocalStorage(state) {
     console.log(e);
   }
 }
-
+// 從localStorage裡頭將先前的state取出
 function loadFromLocalStorage() {
   try {
     const serializedState = localStorage.getItem("state");
@@ -21,13 +22,15 @@ function loadFromLocalStorage() {
     return undefined;
   }
 }
+
 const persistedState = loadFromLocalStorage();
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const middleware = [logger];
 
 const store = createStore(
   rootReducer,
-  persistedState,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  persistedState, //將取得的state放在這邊，即可恢復成以前的state資料
+  composeEnhancers(applyMiddleware(...middleware))
 );
 
 // 只要store有更動 就會執行裡頭的callback function

@@ -8,7 +8,7 @@ import {
 const initialState = {
   // cartHidden: true,
   cartItems: [],
-  cartTotal: 0,
+  // cartTotal: 0,
 };
 
 const cartReducer = (state = initialState, action) => {
