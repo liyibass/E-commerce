@@ -1,28 +1,24 @@
 import React from "react";
 import "./CartIcon.style.scss";
-import { useSelector, useDispatch } from "react-redux";
-import { toggleCartHidden } from "../../redux/cart/cart.action";
+import { useSelector } from "react-redux";
+// import { toggleCartHidden } from "../../redux/cart/cart.action";
 
-function CartIcon() {
-  const cartHidden = useSelector((state) => state.cartToggle.cartHidden);
-  const dispatch = useDispatch();
+function CartIcon(props) {
+  const cartItems = useSelector((state) => state.cart.cartItems);
+
+  // 累加商品數量
+  //reduce（（前次變數，變數）=>前次變數+變數，前次變數初始值）
+  const cartItemsCount = cartItems.reduce(
+    (accumalatedQuantity, cartItem) => accumalatedQuantity + cartItem.quantity,
+    0
+  );
 
   return (
-    <div className="cart-icon" onClick={() => dispatch(toggleCartHidden())}>
+    <div className="cart-icon">
       <i className="shopping-icon fas fa-shopping-cart fa-2x"></i>
-      <span className="item-count">0</span>
+      <span className="item-count">{cartItemsCount}</span>
     </div>
   );
 }
 
-// const mapStateToProps = (state) => {
-//   return { cartHidden: state.cartToggle.cartHidden };
-// };
-
-// const mapDispatchToProps = (dispatch) => {
-//   return {
-//     toggleCartHidden: () => dispatch(toggleCartHidden()),
-//   };
-// };
-
-export default CartIcon;
+export default React.memo(CartIcon);

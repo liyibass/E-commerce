@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./header.style.scss";
 import { Link } from "react-router-dom";
 
@@ -12,7 +12,8 @@ import CartDropDown from "../CartDropDown/CartDropDown.component";
 
 function Header() {
   const currentUser = useSelector((state) => state.user.currentUser);
-  const cartHidden = useSelector((state) => state.cartToggle.cartHidden);
+  // const cartHidden = useSelector((state) => state.cart.cartHidden);
+  const [cartHidden, setCartHidden] = useState(true);
 
   return (
     <div className="header">
@@ -38,11 +39,17 @@ function Header() {
             SIGN IN
           </Link>
         )}
-        <CartIcon />
+
+        {/* <CartIcon onClick={() => setCartHidden(!cartHidden)} /> */}
+        <span onClick={() => setCartHidden(!cartHidden)}>
+          <CartIcon />
+        </span>
       </div>
-      {cartHidden ? null : <CartDropDown />}
+      {cartHidden ? null : (
+        <CartDropDown cartHidden={cartHidden} setCartHidden={setCartHidden} />
+      )}
     </div>
   );
 }
 
-export default Header;
+export default React.memo(Header);

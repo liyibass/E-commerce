@@ -16,10 +16,13 @@
 }
 
 .item-count {
+  width: 20px;
   position: absolute;
   font-size: 10px;
   font-weight: bold;
   bottom: 19px;
-  left: 22px;
+  left: 16px;
+  text-align: center;
   color: white;
+  // background-color: red;
 }

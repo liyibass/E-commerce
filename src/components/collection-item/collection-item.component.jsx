@@ -1,5 +1,8 @@
 import React from "react";
 import "./collection-item.style.scss";
+import CustomButton from "../custom-button/custom-button.component";
+import { useDispatch } from "react-redux";
+import { addCartItems } from "../../redux/cart/cart.action";
 
 function CollectionItem({ item }) {
   let { id, name, price, imageUrl } = item;
@@ -8,6 +11,8 @@ function CollectionItem({ item }) {
     backgroundImage: `url(${imageUrl})`,
   };
 
+  const dispatch = useDispatch();
+
   return (
     <div className="collection-item" key={id}>
       <div style={imageStyle} className="item-image"></div>
@@ -15,6 +20,10 @@ function CollectionItem({ item }) {
         <span className="name">{name}</span>
         <span className="price">{price}</span>
       </div>
+
+      <CustomButton onClick={() => dispatch(addCartItems(item))} inverted>
+        ADD TO CART
+      </CustomButton>
     </div>
   );
 }

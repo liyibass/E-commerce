@@ -1,0 +1,42 @@
+.CheckoutItem {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  min-height: 100px;
+  padding: 15px 0;
+  margin-bottom: 15px;
+
+  border-bottom: 1px solid darkgrey;
+
+  font-size: 20px;
+
+  .CheckoutItem-details {
+    width: 23%;
+
+    &-quantity {
+      i {
+        cursor: pointer;
+      }
+    }
+
+    &:last-child {
+      width: 8%;
+      text-align: center;
+    }
+  }
+
+  .image-container {
+    padding-right: 15px;
+
+    .CheckoutItem-img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  .remove-button {
+    cursor: pointer;
+  }
+}
